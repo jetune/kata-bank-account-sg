@@ -1,0 +1,251 @@
+{
+	"info": {
+		"_postman_id": "2d8532b3-8646-4fc5-8ce2-877a5015e279",
+		"name": "bank-account-kata-sg",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create-client",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\" : \"CLT001\",\r\n    \"lastName\" : \"ETUNE NGI\",\r\n    \"firstName\" : \"Jean-Jacques\",\r\n    \"birthDate\" : \"28/03/1981\",\r\n    \"address\" : {\r\n        \"country\" : \"FRANCE\",\r\n        \"town\" : \"Bussy Saint Georges\",\r\n        \"street\" : \"Boulevard Pierre Mendes\",\r\n        \"number\" : \"6\"\r\n    },\r\n    \"phone\" : \"+33766217888\",\r\n    \"email\" : \"jeanjacques.etunengi@adservio.fr\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/client/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"client",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find-client-by-id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v1/client/:clientId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"client",
+						":clientId"
+					],
+					"variable": [
+						{
+							"key": "clientId",
+							"value": "CLT001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-account",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"number\" : \"ACC001\",\r\n    \"clientId\" : \"CLT001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/account/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"account",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find-account-by-id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v1/account/:accountNumber",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"account",
+						":accountNumber"
+					],
+					"variable": [
+						{
+							"key": "accountNumber",
+							"value": "ACC001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deposit",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v1/operation/deposit/:accountNumber/:amount",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"operation",
+						"deposit",
+						":accountNumber",
+						":amount"
+					],
+					"variable": [
+						{
+							"key": "accountNumber",
+							"value": "ACC001"
+						},
+						{
+							"key": "amount",
+							"value": "10000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "withdrawal",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v1/operation/withdrawal/:accountNumber/:amount?full=false",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"operation",
+						"withdrawal",
+						":accountNumber",
+						":amount"
+					],
+					"query": [
+						{
+							"key": "full",
+							"value": "false"
+						}
+					],
+					"variable": [
+						{
+							"key": "accountNumber",
+							"value": "ACC001"
+						},
+						{
+							"key": "amount",
+							"value": "5000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "statements",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v1/statement/data/:accountNumber",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"statement",
+						"data",
+						":accountNumber"
+					],
+					"variable": [
+						{
+							"key": "accountNumber",
+							"value": "ACC001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "statements-print",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v1/statement/print/:accountNumber",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"statement",
+						"print",
+						":accountNumber"
+					],
+					"variable": [
+						{
+							"key": "accountNumber",
+							"value": "ACC001"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
