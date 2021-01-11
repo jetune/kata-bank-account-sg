@@ -11,8 +11,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.sg.kata.bank.dao.AccountDao;
-import com.sg.kata.bank.dao.ClientDao;
 import com.sg.kata.bank.dao.OperationDao;
 import com.sg.kata.bank.exception.BankAccountException;
 import com.sg.kata.bank.model.Operation;
@@ -30,18 +28,6 @@ import com.sg.kata.bank.model.Operation;
 @ContextConfiguration(classes = { TestDaoConfig.class})
 public class OperationDaoTest {
 	
-	/**
-	 * Client DAO
-	 */
-	@Autowired
-	private ClientDao clientDao;
-
-	/**
-	 * Account DAO
-	 */
-	@Autowired
-	private AccountDao accountDao;
-
 	/**
 	 * Operation DAO
 	 */
