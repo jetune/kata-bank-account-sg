@@ -1,6 +1,10 @@
 # kata-bank-account-sg
 Bank Account Kata For SG
 
+# Design
+
+![](sg-bank-account-kata-simple-design.png)
+
 # To Build
 
 * Clone project `git clone git@github.com:jetune/kata-bank-account-sg.git`
