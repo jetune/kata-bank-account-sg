@@ -9,6 +9,7 @@ import java.util.Objects;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.stereotype.Service;
 
 import com.sg.kata.bank.dao.AccountDao;
 import com.sg.kata.bank.dao.OperationDao;
@@ -25,6 +26,7 @@ import com.sg.kata.bank.service.OperationService;
  * @author <a href="mailto:jean.jacques.x.etune.ngi.-nd@disney.com">Jean-Jacques ETUNE NGI (Java EE Technical Lead / Enterprise Architect)</a>
  * @since Mon, 2021-01-11 - 00:35:31
  */
+@Service
 public class OperationServiceImpl implements OperationService {
 	
 	/**
@@ -69,9 +71,6 @@ public class OperationServiceImpl implements OperationService {
 				.timestamp(LocalDateTime.now())
 				.build();
 		
-		// Add Amount to Account Balance
-		targetAccount.setBalance(targetAccount.getBalance() + amount);
-		
 		// Save Operation
 		operationDao.save(operation);
 		
@@ -106,14 +105,11 @@ public class OperationServiceImpl implements OperationService {
 				.timestamp(LocalDateTime.now())
 				.build();
 		
-		if(amount < targetAccount.getBalance()) {
+		if(amount > targetAccount.getBalance()) {
 			
 			// Throw exception
 			throw new BankAccountException("OPERATION_INSUFFICIENT_FUND", "Insufficiant funds");
 		}
-		
-		// Substract Amount from Account Balance
-		targetAccount.setBalance(targetAccount.getBalance() - amount);
 		
 		// Save Operation
 		operationDao.save(operation);

@@ -4,6 +4,7 @@
 package com.sg.kata.bank.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.sg.kata.bank.dao.AccountDao;
 import com.sg.kata.bank.model.Account;
@@ -14,6 +15,7 @@ import com.sg.kata.bank.service.AccountService;
  * @author <a href="mailto:jean.jacques.x.etune.ngi.-nd@disney.com">Jean-Jacques ETUNE NGI (Java EE Technical Lead / Enterprise Architect)</a>
  * @since Mon, 2021-01-11 - 00:30:51
  */
+@Service
 public class AccountServiceImpl implements AccountService {
 	
 	/**

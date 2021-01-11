@@ -48,7 +48,7 @@ public class InMemoryMapAccountDaoImpl implements AccountDao {
 		}
 		
 		// if Account Client is null
-		if(Objects.isNull(account.getOwner()) || StringUtils.isBlank(account.getOwner().getId())) {
+		if(StringUtils.isBlank(account.getClientId())) {
 			
 			// Throw Exception
 			throw new BankAccountException("SAVE_ACCOUNT_INVALID_ACCOUNT_OWNER", "Invalid Account Owner");
@@ -61,8 +61,11 @@ public class InMemoryMapAccountDaoImpl implements AccountDao {
 			throw new BankAccountException("SAVE_ACCOUNT_ALREADY_EXISTS", "Account Already Exists");
 		}
 		
-		// Save and return account
-		return accounts.put(account.getNumber(), account);
+		// Save in MAP
+		accounts.put(account.getNumber(), account);
+		
+		// Return account
+		return account;
 	}
 
 	/* (non-Javadoc)
@@ -112,7 +115,17 @@ public class InMemoryMapAccountDaoImpl implements AccountDao {
 			throw new BankAccountException("FIND_ACCOUNT_INVALID_ACCOUNT_NUMBER", "Invalid Account Number");
 		}
 		
+		// Get the Client
+		Account account = accounts.get(accountNumber);
+		
+		// If Client Is Null
+		if(Objects.isNull(account)) {
+			
+			// Return all Clients
+			throw new BankAccountException("FIND_ACCOUNT_NOT_FOUND", "Account ID Not Found");
+		}
+		
 		// Find and return Account
-		return accounts.get(accountNumber);
+		return account;
 	}
 }

@@ -3,7 +3,10 @@ package com.sg.kata.bank.tools.rest;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.AccessMode;
@@ -33,6 +36,8 @@ public class ErrorDetails {
 	)
 	@Builder.Default
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	private LocalDateTime timestamp = LocalDateTime.now();
 	
 	/**
@@ -107,7 +112,6 @@ public class ErrorDetails {
 	@Schema(
 			accessMode = AccessMode.READ_ONLY,
 			name = "error"
-	)
-	@JsonIgnore
+	)//@JsonIgnore
 	private Throwable error;
 }

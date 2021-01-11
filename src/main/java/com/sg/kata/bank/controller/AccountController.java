@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sg.kata.bank.model.Client;
-import com.sg.kata.bank.service.ClientService;
+import com.sg.kata.bank.model.Account;
+import com.sg.kata.bank.service.AccountService;
 import com.sg.kata.bank.tools.rest.ErrorDetails;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -31,16 +31,16 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 /**
- * Client Controller
+ * Account Controller 
  * @author <a href="mailto:jean.jacques.x.etune.ngi.-nd@disney.com">Jean-Jacques ETUNE NGI (Java EE Technical Lead / Enterprise Architect)</a>
- * @since Mon, 2021-01-11 - 02:34:12
+ * @since Mon, 2021-01-11 - 09:51:56
  */
 @RestController
 @Validated
-@RequestMapping(path = "/v1/client")
+@RequestMapping(path = "/v1/account")
 @Tag(
-	name = "Bank Client API",
-	description = "Endpoints  allowing Client Operations"
+	name = "Bank Account API",
+	description = "Endpoints  allowing Account Operations"
 )
 @ApiResponses(
 	value = {
@@ -54,65 +54,65 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 		)
 	}
 )
-public class ClientController {
+public class AccountController {
 	
 	/**
 	 * Client Service
 	 */
 	@Autowired
-	private ClientService service;
+	private AccountService service;
 	
 	/**
 	 * Method used to save client
-	 * @param client	Client to save
-	 * @return	Saved Client
+	 * @param account	Account to save
+	 * @return	Saved Account
 	 */
 	@Operation(
 		operationId = "save",
-		summary = "Save Client",
-		description = "Allow to Save Client Informations",
-		tags = { "Operations" }
+		summary = "Save Account",
+		description = "Allow to Save Account Informations",
+		tags = { "Account" }
 	)
 	@PostMapping(
 		consumes = { APPLICATION_JSON_VALUE },
 		produces = { MediaType.APPLICATION_JSON_VALUE }
 	)
 	@ResponseBody
-	public Client save(@RequestBody Client client) {
+	public Account save(@RequestBody Account account) {
 		
-		// Save and return client
-		return service.save(client);
+		// Save and return account
+		return service.save(account);
 	}
 	
 	/**
-	 * Method used to find client by ID
-	 * @param clientId	Client ID
-	 * @return	Founded Client
+	 * Method used to find Account by Number
+	 * @param accountNumber
+	 * @return	Founded Account
 	 */
 	@Operation(
-		operationId = "findById",
-		summary = "Find By ID",
-		description = "Find Client by ID",
-		tags = { "Client" }
+		operationId = "findByNumber",
+		summary = "Find By Number",
+		description = "Find Account by ID",
+		tags = { "Account" }
 	)
 	@ApiResponse(
 		responseCode = "200",
 		description = "Operation ended successfully.",
-		content = @Content(mediaType = "application/json", schema = @Schema(implementation = Client.class))
+		content = @Content(mediaType = "application/json", schema = @Schema(implementation = Account.class))
 	)
 	@GetMapping(
-		path = "/{clientId}",
+		path = "/{accountNumber}",
 		produces = { APPLICATION_JSON_VALUE }
 	)
 	@ResponseBody
-	public Client findById(
+	public Account findByNumber(
 			
-			@Parameter(name = "clientId", description = "Target Clien ID", required = true)
-			@PathVariable(name = "clientId", required = true)
+			@Parameter(name = "accountNumber", description = "Target Account Number", required = true)
+			@PathVariable(name = "accountNumber", required = true)
 			@NotEmpty
-			String clientId) {
+			String accountNumber) {
 		
-		// Return founded Client
-		return service.findById(clientId);
+		// Return founded Account
+		return service.findByNumber(accountNumber);
 	}
 }

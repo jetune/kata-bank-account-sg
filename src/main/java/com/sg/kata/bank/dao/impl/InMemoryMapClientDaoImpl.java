@@ -54,8 +54,11 @@ public class InMemoryMapClientDaoImpl implements ClientDao {
 			throw new BankAccountException("SAVE_CLIENT_ALREADY_EXISTS", "Invalid Client ID");
 		}
 		
+		// Save in Map
+		clients.put(client.getId(), client);
+		
 		// Save and return Saved Client
-		return clients.put(client.getId(), client);
+		return client;
 	}
 	
 	/* (non-Javadoc)
@@ -71,7 +74,17 @@ public class InMemoryMapClientDaoImpl implements ClientDao {
 			throw new BankAccountException("FIND_CLIENT_INVALID_CLIENT_ID", "Invalid Client ID");
 		}
 		
+		// Get the Client
+		Client client = clients.get(clientId);
+		
+		// If Client Is Null
+		if(Objects.isNull(client)) {
+			
+			// Return all Clients
+			throw new BankAccountException("FIND_CLIENT_NOT_FOUND", "Client ID Not Found");
+		}
+		
 		// Find and return Client
-		return clients.get(clientId);
+		return client;
 	}
 }

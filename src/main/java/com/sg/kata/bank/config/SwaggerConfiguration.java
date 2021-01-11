@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -36,7 +37,7 @@ public class SwaggerConfiguration implements WebMvcConfigurer {
 	@Override
 	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
     	converters.add(new StringHttpMessageConverter());
-        converters.add(new MappingJackson2HttpMessageConverter(objectMapper()));
+        converters.add(new MappingJackson2HttpMessageConverter(swaggerObjectMapper()));
         converters.add(new ByteArrayHttpMessageConverter());
     }
 	
@@ -45,7 +46,8 @@ public class SwaggerConfiguration implements WebMvcConfigurer {
 	 * @return	Object Mapper Provider
 	 */
     @Bean
-    public ObjectMapper objectMapper() {
+    @Primary
+    public ObjectMapper swaggerObjectMapper() {
     	
     	// Build and return provider
         return new ObjectMapper()

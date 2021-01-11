@@ -26,7 +26,7 @@ public class AccountStatementServiceImpl implements AccountStatementService {
 	/**
 	 * Output Format
 	 */
-	private static final String ACCOUNT_STATEMENT_FORMAT = "%-15s\t%-15s\t%15s\t%15s";
+	private static final String ACCOUNT_STATEMENT_FORMAT = "%-15s\t%-15s\t%35s\t%15s";
 	
 	/**
 	 * Account Statement DAO
